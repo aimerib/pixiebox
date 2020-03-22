@@ -1,0 +1,20 @@
+---
+version: '2'
+volumes:
+  db-data:
+    external: false
+  bundle-data:
+    external: false
+services:
+  dev:
+    build: "."
+    entrypoint: ".pixiebox/start"
+    volumes:
+    - ".:/var/www:cached"
+    volumes_from:
+    - bundle
+    hostname: pixiebox
+  bundle:
+    image: busybox
+    volumes:
+    - bundle-data:/usr/local/bundle:cached
